@@ -17,6 +17,100 @@
   - `npm run test-calculator`
 */
 
-class Calculator {}
+class Calculator {
 
+  constructor() {
+    this.result = 0;
+    console.log("initialized", this.result);
+  }
+  add(num) {
+    if (isNaN(num)) {
+      throw new Error("Invalid input.");
+    }
+    this.result += num;
+    return this;
+  }
+
+  subtract(num) {
+    if (isNaN(num)) {
+      throw new Error("Invalid input.");
+    }
+    this.result -= num;
+    return this;
+  }
+
+  multiply(num) {
+    if (isNaN(num)) {
+      throw new Error("Invalid input.");
+    }
+    if (this.result === 0) {
+      this.result = 1;
+    }
+    this.result *= num;
+    return this;
+  }
+
+  divide(num) {
+    if (isNaN(num) || num === 0) {
+      throw new Error("Invalid input or division by zero.");
+    }
+    this.result /= num;
+    return this;
+  }
+
+
+  // add(num) {
+  //   console.log(this.result);
+  //   this.result = this.result + num;
+  //   console.log("add",this.result);
+  // }
+
+  // subtract(num) {
+  //   this.result -= num;
+  // }
+
+  // multiply(num) {
+  //   if(this.result == 0) {
+  //     this.result == 1;
+  //   }
+  //   this.result *= num;
+  // }
+
+  // divide(num) {
+  //   if (isNaN(num) || num == 0) {
+  //     throw new Error("Invalid input or division by zero.");
+  //   }
+  //   this.result /= num;
+  //   return this;
+  // }
+
+  clear() {
+    this.result = 0;
+  }
+
+  getResult() {
+    return this.result;
+  }
+
+  calculate(expression) {
+    const sanitizedExpression = expression.replace(/\s+/g, "");
+    if (!/^[\d+\-*/().]+$/.test(sanitizedExpression)) {
+      throw new Error("Invalid expression.");
+    }
+
+    try {
+      this.result = eval(sanitizedExpression); // Use eval to calculate the expression
+      return this;
+    } catch (error) {
+      throw new Error("Error calculating the expression.");
+    }
+  }
+}
+
+const cal = new Calculator();
+// cal.calculate("10 +   2 *    (   6 - (4 + 1) / 2) + 7");
+
+cal.add(10);
+cal.divide(4);
+console.log(cal.result);
 module.exports = Calculator;

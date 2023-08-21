@@ -12,7 +12,54 @@
 */
 
 class Todo {
+  constructor() {
+    this.todo = [];
+  }
 
+  add(todo) {
+    this.todo.push(todo); 
+  }
+
+  remove(indexOfTodo) {
+    if(indexOfTodo < 0 || indexOfTodo > this.todo.length - 1) {
+      // throw new Error("Index out of bounds");
+      return -1;
+    }
+    this.todo.splice(indexOfTodo, 1);
+  }
+
+  update(index, updatedTodo) {
+    if(index < 0 || index > this.todo.length - 1) {
+      // throw new Error("Index out of bounds");
+      return -1;
+    }
+    this.todo[index] = updatedTodo;
+  }
+
+  getAll() {
+    return this.todo;
+  }
+
+  get(indexOfTodo) {
+    if(indexOfTodo < 0 || indexOfTodo > this.todo.length - 1) {
+      // throw new Error("Index out of bounds");
+      return null;
+    }
+    return this.todo[indexOfTodo];
+  }
+
+  clear() {
+    this.todo = [];
+  }
 }
+
+const todo = new Todo();
+todo.add('Task 1');
+todo.add('Task 2');
+todo.add('Task 3');
+todo.add('Task 4');
+todo.remove(1);
+todo.getAll();
+console.log(todo.todo);
 
 module.exports = Todo;
