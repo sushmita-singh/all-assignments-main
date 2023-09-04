@@ -30,12 +30,13 @@ function waitThreeSecond() {
 }
 
 function calculateTime() {
-    var startTime = new Date.now();
+    var startTime = Date.now();
     waitOneSecond().then(waitTwoSecond().then(waitThreeSecond().then(() => {
-        console.log("All executed");
+        console.log("All executed");    
+        var endTime = Date.now();
+        console.log("Time taken", endTime-startTime, "ms");
     })));
-    var endTime = new Date.now();
-    console.log("Time taken", endTime-startTime);
+
 }
 
 calculateTime();
