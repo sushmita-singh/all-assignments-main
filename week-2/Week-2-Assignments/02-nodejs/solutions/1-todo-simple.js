@@ -1,6 +1,5 @@
-
-const express = require('express');
-const bodyParser = require('body-parser');
+const express = require("express");
+const bodyParser = require("body-parser");
 
 const app = express();
 
@@ -73,3 +72,5 @@ app.use((req, res, next) => {
 });
 
 module.exports = app;
+
+app.listen(3000);

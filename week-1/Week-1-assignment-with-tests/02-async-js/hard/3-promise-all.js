@@ -30,13 +30,13 @@ function waitThreeSecond() {
 }
 
 function calculateTime() {
-    var startTime = Date.now();
-    waitOneSecond().then(waitTwoSecond().then(waitThreeSecond().then(() => {
-        console.log("All executed");    
+    return Promise.all([waitOneSecond(), waitTwoSecond(), waitThreeSecond()]).then(() => {
+        console.log("All Promises Resolved");
         var endTime = Date.now();
-        console.log("Time taken", endTime-startTime, "ms");
-    })));
-
+        console.log("Time taken: ", endTime - startTime, "ms");
+    });
 }
 
-calculateTime();
+var startTime = Date.now();
+
+console.log(calculateTime());
