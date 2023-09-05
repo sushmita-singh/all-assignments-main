@@ -4,45 +4,39 @@
  * Print how long it took for all 3 promises to resolve.
  */
 
-const { rejects } = require("assert");
-const { resolve } = require("path");
-
 
 function waitOneSecond() {
-    return new Promise((resolve, reject) => {
-        setTimeout(()=> {
-            resolve("Function one executed");
-        }, 1000);
-    })
-}
-
-function waitTwoSecond() {
-    return new Promise((resolve, reject) => {
+    return new Promise((res, rej) => {
         setTimeout(() => {
-            resolve("Function two executed");
-        }, 2000);
-    })
-
-}
-
-function waitThreeSecond() {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve("Function three executed");
-        }, 3000);
-    })
-}
-
-function calculateTime() {
-    waitOneSecond().then(() => {
-        console.log("First Promise Fulfilled");
-        waitTwoSecond()
-    }).then(()=> {
-        console.log("Second Promise Fulfilled");
-        waitThreeSecond()
-    }).then(() => {
-        console.log("All Promises Fulfilled");
+            res("waitOne Second");
+        },1000);
     });
 }
 
-calculateTime();
+function waitTwoSecond() {
+    return new Promise((res, rej) => {
+        setTimeout(() => {
+            res("waitTwo Second");
+        },2000);
+    });
+}
+
+function waitThreeSecond() {
+    return new Promise((res, rej) => {
+        setTimeout(() => {
+            res("waitThree Second");
+        },3000);
+    });
+}
+
+function calculateTime() {
+    return Promise.all([waitOneSecond(), waitTwoSecond(), waitThreeSecond()]).then(() => {
+        console.log("All Promises Resolved");
+        var endTime = Date.now();
+        console.log("Time taken: ", endTime - startTime, "ms");
+    });
+}
+
+var startTime = Date.now();
+
+console.log(calculateTime());
