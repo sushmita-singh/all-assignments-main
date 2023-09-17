@@ -5,5 +5,15 @@ milliseconds.
  */
 
 function sleep (seconds) {
+    const start = new Date().getTime();
+    let currentTime = start;
+  
+    while (currentTime - start < seconds * 1000) {
+      currentTime = new Date().getTime();
+    }
 
+    // If we use setTimeout instead of this, the thread will not remain busy. 
 }
+console.log("Start");
+sleep(3);
+console.log("End");
